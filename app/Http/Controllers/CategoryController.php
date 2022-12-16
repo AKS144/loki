@@ -85,12 +85,15 @@ class CategoryController extends Controller
 
     public function update(Request $request, $id) 
     {
-        // $category = Category::find($id);
-        // $category->name = $request->name;
-        // $category->save();
+        $category = Category::find($id);
+        $category->name = $request->name;
+        $category->save();
+
+        return redirect('category')->with('success', 'Updated!');
+
 
         //update user info
-        $validator = Validator::make($request->all(), [
+        /*$validator = Validator::make($request->all(), [
                 //'id'       => 'required',
                 'name'       =>  'required|regex:/^[a-zA-ZÑñ\s]+$/|max:120',    
          
@@ -113,7 +116,7 @@ class CategoryController extends Controller
             $bug = $e->getMessage();
             return redirect()->back()->with('error', $bug);
     
-        }
+        }*/
     }
 
 
