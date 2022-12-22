@@ -37,7 +37,6 @@ class CategoryController extends Controller
         // create user 
         $validator = Validator::make($request->all(), [            
             'name'          =>  'required|regex:/^[a-zA-ZÑñ\s]+$/|max:120',    
-
         ]);
         
         if($validator->fails()) {
@@ -53,13 +52,13 @@ class CategoryController extends Controller
             $category->name         =   $request->name;                 
             $category->save();
             //dd($category);
-
         
             if($category){ 
                 return redirect('category')->with('success', 'New category created!');
             }else{
                 return redirect('category')->with('error', 'Failed to create new category! Try again.');
             }
+
         }catch (\Exception $e) {
             $bug = $e->getMessage();
             return redirect()->back()->with('error', $bug);

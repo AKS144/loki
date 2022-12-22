@@ -18,11 +18,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 
 
 
-
-
 Route::get('/', function () { return view('home'); });
-
-
 
 
 Route::get('login', [LoginController::class,'showLoginForm'])->name('login');
@@ -35,8 +31,6 @@ Route::get('password/forget',  function () {
 Route::post('password/email', [ForgotPasswordController::class,'sendResetLinkEmail'])->name('password.email');
 Route::get('password/reset/{token}', [ResetPasswordController::class,'showResetForm'])->name('password.reset');
 Route::post('password/reset', [ResetPasswordController::class,'reset'])->name('password.update');
-
-
 
 
 Route::group(['middleware' => 'auth'], function(){
@@ -139,6 +133,9 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('/session-timeout', function () { return view('pages.ui.session-timeout'); });
 	Route::get('/pricing', function () { return view('pages.pricing'); });
 
+
+
+	
 
 	//admin panel
 	Route::resource('/products', ProductController::class);

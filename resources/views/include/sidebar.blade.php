@@ -47,17 +47,59 @@
 
                 <div class="nav-item {{ $segment1 == 'users' || $segment1 == 'roles' || $segment1 == 'permission' || $segment1 == 'user' ? 'active open' : '' }} has-sub">
                     <a href="#"><i class="ik ik-user"></i><span>{{ __('Category') }}</span></a>
-                    <div class="submenu-content">
-                        <!-- only those have manage_user permission will get access -->
+                    <div class="submenu-content">                      
                         @can('manage_user')
                             <a href="{{ route('category.index') }}"
                                 class="menu-item {{ $segment1 == 'users' ? 'active' : '' }}">{{ __('Category') }}</a>
                             <a href="{{ route('category.create') }}"
                                 class="menu-item {{ $segment1 == 'user' && $segment2 == 'create' ? 'active' : '' }}">{{ __('Add Category') }}</a>
-                        @endcan
-                                            
+                        @endcan                                            
                     </div>
                 </div>
+
+                <div class="nav-item {{ $segment1 == 'users' || $segment1 == 'roles' || $segment1 == 'permission' || $segment1 == 'user' ? 'active open' : '' }} has-sub">
+                    <a href="#"><i class="ik ik-user"></i><span>{{ __('Sub Category') }}</span></a>
+                    <div class="submenu-content">                      
+                        @can('manage_user')
+                            <a href="{{ route('subcategory.index') }}"
+                                class="menu-item {{ $segment1 == 'users' ? 'active' : '' }}">{{ __('Sub Category') }}</a>
+                            <a href="{{ route('subcategory.create') }}"
+                                class="menu-item {{ $segment1 == 'user' && $segment2 == 'create' ? 'active' : '' }}">{{ __('Add SubCategory') }}</a>
+                        @endcan                                            
+                    </div>
+                </div>
+
+
+
+                <div class="nav-item has-sub">
+                    <a href="#"><i class="ik ik-user"></i><span>{{ __('Product') }}</span></a>
+                    <div class="submenu-content">                   
+                        @can('manage_user')
+                            <a href="{{ route('products.index') }}"
+                                class="menu-item {{ $segment1 == 'users' ? 'active' : '' }}">{{ __('Products') }}</a>
+                            <a href="{{ route('products.create') }}"
+                                class="menu-item {{ $segment1 == 'user' && $segment2 == 'create' ? 'active' : '' }}">{{ __('Add Products') }}</a>
+                        @endcan                                            
+                    </div>
+                </div>
+
+
+                
+                <div class="nav-item {{ $segment1 == 'users' || $segment1 == 'roles' || $segment1 == 'permission' || $segment1 == 'user' ? 'active open' : '' }} has-sub">
+                    <a href="#"><i class="ik ik-user"></i><span>{{ __('Banner Image') }}</span></a>
+                    <div class="submenu-content">
+                        <!-- only those have manage_user permission will get access -->
+                        @can('manage_user')
+                            <a href="{{ route('bannerimage.index') }}"
+                                class="menu-item {{ $segment1 == 'users' ? 'active' : '' }}">{{ __('Bannerimage') }}</a>
+                            <a href="{{ route('bannerimage.create') }}"
+                                class="menu-item {{ $segment1 == 'user' && $segment2 == 'create' ? 'active' : '' }}">{{ __('Add Bannerimage') }}</a>
+                        @endcan                                            
+                    </div>
+                </div>
+
+
+
                
 
                 <div class="nav-lavel">{{ __('Documentation') }} </div>
