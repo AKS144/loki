@@ -101,7 +101,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                                                              
+                                   
                                         <a style="color:black" href="{{ route('category.destroy',$category->id) }}" onclick="event.preventDefault();
                                             document.getElementById('delete-form-{{ $category->id }}').submit();">
                                            <i class="ik ik-trash-2 f-16 text-red"></i>

@@ -44,6 +44,7 @@
                         <table class="table">
                             <thead>
                                 <tr>
+                                    <th>{{ __('ID')}}</th>
                                     <th>{{ __('Name')}}</th>
                                     <th>{{ __('Category')}}</th>                          
                                     <th>{{ __('Action')}}</th>
@@ -54,8 +55,19 @@
                                 <tr>
                                     <td>{{ ++$key }}</td>
                                     <td>{{ $subcategory->name }}</td>
+                                    <td>{{ $subcategory->categories->name }}</td>
                                     <td>
-                                        {{-- <a data-toggle="modal" data-target="#fullwindowModal{{ $category->id }}" href="{{ route('category.edit',$category->id) }}"><i class="ik ik-edit-2 f-16 mr-15 text-green"></i></a>  --}}
+                                        <a style="color:black" href="{{ route('subcategory.destroy',$subcategory->id) }}" onclick="event.preventDefault();
+                                            document.getElementById('delete-form-{{ $subcategory->id }}').submit();">
+                                           <i class="ik ik-trash-2 f-16 text-red"></i>
+                                        </a>
+                                        <form id="delete-form-{{ $subcategory->id }}" action="{{ route('subcategory.destroy',$subcategory->id) }}"
+                                            method="POST" style="display: none;">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+                                        
+                                        
                                         <a data-toggle="modal" data-target="#exampleModalCenter{{ $subcategory->id }}"><i class="ik ik-edit-2 f-16 mr-15 text-green"></i></a>  
                                         <div class="modal fade" id="exampleModalCenter{{ $subcategory->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -81,33 +93,20 @@
                                                                                 </span>
                                                                             @enderror
                                                                         </div>  
-                                                                        <div class="form-group">                                                                           
-                                                                            <label for="name">{{ __('Category')}}<span class="text-red">*</span></label>
-                                                                            <input id="name" type="text" class="form-control @error('Category') is-invalid @enderror" name="category_id" value="{{ $subcategory->category_id }}" required>
-                                                                            <div class="help-block with-errors"></div>
-                                                                            @error('name')
-                                                                                <span class="invalid-feedback" role="alert">
-                                                                                    <strong>{{ $message }}</strong>
-                                                                                </span>
-                                                                            @enderror
-                                                                        </div>
-                                                                        {{-- <div class="row">
-                                                                            <div class="col-md-6">
-                                                                                <div class="form-group">
-                                                                                    <label for="exampleInputEmail3">{{ __('Email address')}}</label>
-                                                                                    <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-md-6">
-                                                                                <div class="form-group">
-                                                                                    <label for="exampleSelectGender">{{ __('Gender')}}</label>
-                                                                                    <select class="form-control" id="exampleSelectGender">
-                                                                                        <option>{{ __('Male')}}</option>
-                                                                                        <option>{{ __('Female')}}</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>    --}}
+                                                                                                                   
+                                                                        <div class="form-group">
+                                                                            <label for="">{{ __('Category')}}</label>
+                                                                            <select class="form-control" name="category_id" required>
+                                                                                @foreach (App\Category::all()->pluck('name', 'id') as $key => $val)
+                                                                                    @if($subcategory->category_id == $key)
+                                                                                        <option value="{{ $key }}" selected>{{ $val }}</option>
+                                                                                    @else
+                                                                                        <option value="{{ $key }}">{{ $val }}</option>
+                                                                                    @endif
+                                                                                @endforeach	
+                                                                            </select>
+                                                                        <div>
+     
                                                                         <br />
                                                                         <br /> 
                                                                         <div class="modal-footer">                                                                 
@@ -123,18 +122,8 @@
                                                         <button type="button" class="btn btn-primary">{{ __('Save changes')}}</button>
                                                     </div> --}}
                                                 </div>
-                                            </div>
-                                        </div>
-                                                                              
-                                        <a style="color:black" href="{{ route('subcategory.destroy',$subcategory->id) }}" onclick="event.preventDefault();
-                                            document.getElementById('delete-form-{{ $subcategory->id }}').submit();">
-                                           <i class="ik ik-trash-2 f-16 text-red"></i>
-                                        </a>
-                                        <form id="delete-form-{{ $subcategory->id }}" action="{{ route('subcategory.destroy',$subcategory->id) }}"
-                                            method="POST" style="display: none;">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
+                                            </div>                                      
+                                        </div>    
                                     </td>
                                 </tr>
                                 @endforeach

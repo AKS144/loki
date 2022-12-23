@@ -2,8 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Category;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class SubCategory extends Model
 {
@@ -16,6 +17,6 @@ class SubCategory extends Model
 
     public function categories()
     {
-    	return $this->belongsTo('App/Category');
+    	return $this->belongsTo(Category::class,'category_id','id');
     }
 }

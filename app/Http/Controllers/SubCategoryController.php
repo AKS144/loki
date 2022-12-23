@@ -19,6 +19,7 @@ class SubCategoryController extends Controller {
     public function index() 
     {
         $subcategory = SubCategory::orderBy('id', 'DESC')->get();
+        //$category = Category::all()->pluck('name', 'id'); //dd($category);
         return view('subcategory.index',compact('subcategory'));  
     }
 
@@ -79,13 +80,45 @@ class SubCategoryController extends Controller {
 
     public function update( Request $request, $id ) 
     {
-        $category = SubCategory::find( $id );
-        $category->name = $request->name;
-        $category->save();
+        // $category = SubCategory::find( $id );
+        // $category->name = $request->name;
+        // $category->save();
+
+        $validator = Validator::make($request->all(), [            
+            'name'   =>  'required|regex:/^[a-zA-ZÑñ\s]+$/|max:120',    
+        ]);
+        
+        if($validator->fails()) {
+            return redirect()->back()->withInput()->with('error', $validator->messages()->first());
+        }
+        try
+        {           
+            // $category = Category::create([
+            //    'name'     => $request->name,                      
+            // ]);
+
+            $subcategory               =   SubCategory::find($id);
+            $subcategory->name         =   $request->name;
+            $subcategory->category_id  =   $request->category_id;        
+            $subcategory->save();
+            //dd($subcategory);
+        
+            if($subcategory)
+            { 
+                return redirect('subcategory')->with('success', 'New category created!');
+            }else{
+                return redirect('subcategory')->with('error', 'Failed to create new category! Try again.');
+            }
+
+        }catch (Exception $e) {
+            $bug = $e->getMessage();
+            return redirect()->back()->with('error', $bug);
+        }
     }
 
     public function destroy( SubCategory $subCategory ) 
     {
-        //
+        $subCategory->delete();
+        return redirect()->route('subcategory.index')->with('success','Category has been deleted successfully');
     }
 }

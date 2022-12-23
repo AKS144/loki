@@ -78,6 +78,7 @@
                                     <span class="text-danger">{{ $errors->first('categories') }}</span>
                                 @endif       
                             </div> --}}
+       
 
                             <div class="row">                       
                                 <div class="col-md-6">
@@ -85,8 +86,8 @@
                                         <label for="">{{ __('Category')}}</label>
                                         <select class="form-control" name="category_id" required>
                                             <option>{{ __('Select Category')}}</option>
-                                            @foreach($category as $key => $val)
-                                                <option value="{{ $key }}">{{ $val }}</option>
+                                            @foreach($category as $id => $categories)                                             
+												<option value="{{ $id }}" {{ (isset($subcat) && $subcat->categories ? $job->categories->id : old('categories')) == $id ? 'selected' : '' }}>{{ $categories }}</option>
                                             @endforeach    
                                         </select>
                                     </div>
