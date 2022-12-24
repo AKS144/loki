@@ -1,5 +1,5 @@
 @extends('layouts.main') 
-@section('title', 'Category')
+@section('title', 'Product')
 @section('content')
     <!-- push external head elements to head -->
     @push('head')
@@ -14,8 +14,8 @@
                     <div class="page-header-title">
                         <i class="ik ik-users bg-blue"></i>
                         <div class="d-inline">
-                            <h5>{{ __('Category')}}</h5>
-                            <span>{{ __('List of Category')}}</span>
+                            <h5>{{ __('product')}}</h5>
+                            <span>{{ __('List of Product')}}</span>
                         </div>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
                                 <a href="{{route('dashboard')}}"><i class="ik ik-home"></i></a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a href="#">{{ __('Products')}}</a>
+                                <a href="#">{{ __('Product')}}</a>
                             </li>
                         </ol>
                     </nav>
@@ -40,7 +40,7 @@
              
             <div class="col-md-12">
                 <div class="card p-3">
-                    <div class="card-header"><h3>{{ __('Category')}}</h3></div>
+                    <div class="card-header"><h3>{{ __('Product')}}</h3></div>
                     <div class="card-body">
                         <table class="table">
                             <thead>
@@ -51,14 +51,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($category as $key => $category)
+                                @foreach($product as $key => $product)
                                 <tr>
                                     <td>{{ ++$key }}</td>
-                                    <td>{{ $category->name }}</td>
+                                    <td>{{ $product->name }}</td>
                                     <td>
-                                        {{-- <a data-toggle="modal" data-target="#fullwindowModal{{ $category->id }}" href="{{ route('category.edit',$category->id) }}"><i class="ik ik-edit-2 f-16 mr-15 text-green"></i></a>  --}}
-                                        <a data-toggle="modal" data-target="#exampleModalCenter{{ $category->id }}"><i class="ik ik-edit-2 f-16 mr-15 text-green"></i></a>  
-                                        <div class="modal fade" id="exampleModalCenter{{ $category->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterLabel" aria-hidden="true">
+                                        {{-- <a data-toggle="modal" data-target="#fullwindowModal{{ $product->id }}" href="{{ route('product.edit',$product->id) }}"><i class="ik ik-edit-2 f-16 mr-15 text-green"></i></a>  --}}
+                                        <a data-toggle="modal" data-target="#exampleModalCenter{{ $product->id }}"><i class="ik ik-edit-2 f-16 mr-15 text-green"></i></a>  
+                                        <div class="modal fade" id="exampleModalCenter{{ $product->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -69,14 +69,14 @@
                                                             <div class="card">
                                                                 {{-- <div class="card-header"><h3>{{ __('Default form')}}</h3></div> --}}
                                                                 <div class="card-body">
-                                                                    <form class="forms-sample" method="POST" action="{{ route('category.update',$category->id) }}">
+                                                                    <form class="forms-sample" method="POST" action="{{ route('product.update',$product->id) }}">
                                                                         @csrf
                                                                         @method('PUT')   
                                                                         <div class="form-group">
                                                                             {{-- <label for="exampleInputUsername1">{{ __('Username')}}</label> --}}
                                                                             {{-- <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Username"> --}}
                                                                             <label for="name">{{ __('Name')}}<span class="text-red">*</span></label>
-                                                                            <input id="name" type="text" name="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $category->name }}" required>
+                                                                            <input id="name" type="text" name="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $product->name }}" required>
                                                                             <div class="help-block with-errors"></div>
                                                                             @error('name')
                                                                                 <span class="invalid-feedback" role="alert">
@@ -102,11 +102,11 @@
                                             </div>
                                         </div>
                                    
-                                        <a style="color:black" href="{{ route('category.destroy',$category->id) }}" onclick="event.preventDefault();
-                                            document.getElementById('delete-form-{{ $category->id }}').submit();">
+                                        <a style="color:black" href="{{ route('product.destroy',$product->id) }}" onclick="event.preventDefault();
+                                            document.getElementById('delete-form-{{ $product->id }}').submit();">
                                            <i class="ik ik-trash-2 f-16 text-red"></i>
                                         </a>
-                                        <form id="delete-form-{{ $category->id }}" action="{{ route('category.destroy',$category->id) }}"
+                                        <form id="delete-form-{{ $product->id }}" action="{{ route('product.destroy',$product->id) }}"
                                             method="POST" style="display: none;">
                                             @csrf
                                             @method('DELETE')
